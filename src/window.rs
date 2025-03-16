@@ -41,6 +41,7 @@ fn apply_settings(config: &Settings) -> (TextEditor,Window){
 
 }
 
+
 pub fn create(config: Settings) {
     let app = app::App::default();
     let mut buffer = TextBuffer::default();
@@ -55,6 +56,15 @@ pub fn create(config: Settings) {
     window.resizable(&editor);
 
     let mut last_prompt_idx = config.prompt.len() as i32;
+
+    let mut oldBuffer = buffer.clone();
+
+    let mut lines: Vec<TextBuffer> = Vec::new();
+
+    let mut line_above = TextBuffer::default();
+
+
+    let mut up_count = 0;
 
     editor.handle({
         let mut buffer = buffer.clone();
@@ -71,13 +81,49 @@ pub fn create(config: Settings) {
                             widget.set_insert_position(last_prompt_idx + 1 as i32);
                         }
                     }
+                    if key == Key::Up {
+                        // prevent the user from going up
+                        buffer = oldBuffer.clone();
+
+                        let mut idx = (lines.len() - 1 - up_count) as i32;
+
+                        if idx < 0 {
+                            idx = 0;
+                        }
+
+
+                        up_count += 1;
+
+                        println!("index: {}" ,idx);
+
+                        let wanted_line = lines[idx as usize].clone();
+
+                        println!("Wanted line text: {}", wanted_line.text());
+
+                        for line in lines.iter() {
+                            println!("Line: {}", line.text());
+                        }
+
+                        buffer.set_text(&(String::new() + &buffer.text().as_str().to_owned() + &wanted_line.text().as_str().to_owned()));
+                        widget.set_insert_position(buffer.length());
+
+                    }
                     if key == Key::Enter {
                         if let Some(buf) = widget.buffer() {
                             let content = buf.text();
                             if let Some(last_line) = content.lines().last() {
                                 if last_line.starts_with(&config.prompt) {
                                     let user_input = last_line.trim_start_matches(&config.prompt);
+
+                                    line_above.set_text(user_input);
+
+                                    println!("Line above var: {}" , line_above.text());
+
+                                    lines.push(line_above.clone());
+
                                     println!("Command: {}", user_input);
+
+                                    up_count = 0;
 
                                     command::handle(user_input);
 
@@ -92,6 +138,7 @@ pub fn create(config: Settings) {
 
                                     buffer.append(&config.prompt);
                                     widget.set_insert_position(buf.length());
+                                    oldBuffer = buffer.clone();
                                 }
                             }
                         }

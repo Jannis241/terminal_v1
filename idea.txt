@@ -20,3 +20,9 @@ Features:
 - name completion (durch tab)
 - propmt sollte man nicht löschen können
 - man darf mit up arrow nicht die möglichkeit haben den text einer anderen zeiel noch zu verändern
+- ctrl a kann man noch alles auswählen -> man soll nur die leztze Zeile auswählen können
+- wenn man nochmal up arrow drück soll die zeile darüber dann kommen
+
+
+!!! wenn man up macht und dann enter, muss noch zu prompt position der wert addiert werden, da man so nur guckt
+wie lang der user input ist, und der user input bei "up" ja theoretisch nur 1 ist !!!
