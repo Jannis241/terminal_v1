@@ -1,0 +1,22 @@
+
+
+Features:
+- eigenes Fenster
+- settings die gespeichert werden
+- cd
+- shortscuts erstellen durch zb: create shortcut "key" "action" -> dazu gehören dann natürlich auch zb list settings, delete settings, change settings usw
+- explorer öffnen (mit path)
+- vscode öffnen
+- cloc
+- cargo
+- create file
+- create folder
+- list files in current folder
+- rename files
+- show your current path
+- delete files
+- move files from one path to another
+- copy paste undo
+- name completion (durch tab)
+- propmt sollte man nicht löschen können
+- man darf mit up arrow nicht die möglichkeit haben den text einer anderen zeiel noch zu verändern
