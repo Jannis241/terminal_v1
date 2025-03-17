@@ -23,6 +23,7 @@ Features:
 - ctrl a kann man noch alles auswählen -> man soll nur die leztze Zeile auswählen können
 - wenn man nochmal up arrow drück soll die zeile darüber dann kommen
 
+!! prompt kann man irgendwie immer ienmal löschen! !!
 
 !!! wenn man up macht und dann enter, muss noch zu prompt position der wert addiert werden, da man so nur guckt
 wie lang der user input ist, und der user input bei "up" ja theoretisch nur 1 ist !!!
